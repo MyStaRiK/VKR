@@ -1,0 +1,263 @@
+/* ───────── Контейнер и карточка ───────── */
+.main{
+    max-width:1100px;
+    width:96%;
+    margin:60px auto;
+  }
+  .card{
+    background:var(--bg-card);
+    border:1px solid var(--border-card);
+    border-radius:18px;
+    padding:42px 48px;
+    box-shadow:0 16px 32px rgba(0,0,0,.55);
+  }
+  .card h2{
+    text-align:center;
+    margin:0 0 32px;
+    color:var(--brand-start);
+    font-size:26px;
+  }
+  
+  /* ───────── Сообщения об ошибке ───────── */
+  .errorBox,
+  .fieldErrorMsg{
+    background:#ffe5e5;
+    color:var(--red);
+    padding:12px 16px;
+    border-radius:8px;
+    font-size:14px;
+    line-height:1.4;
+  }
+  .errorBox{margin-bottom:20px;text-align:center}
+  .fieldErrorMsg{margin-bottom:8px}
+  
+  /* ───────── Сетка формы ───────── */
+  .form{display:flex;flex-direction:column;gap:24px}
+  .labelText{font-size:15px;color:var(--text-main);margin-bottom:8px}
+  
+  /* ───────── Поле выбора файла ───────── */
+  .fileField{display:flex;flex-direction:column;gap:14px}
+  .fileLabel{
+    display:inline-block;
+    font-size:15px;
+    color:var(--text-main);
+  }
+  .fileLabel input[type="file"]{
+    margin-top:8px;
+    width:100%;
+    padding:10px 14px;
+    border:1px dashed var(--border-card);
+    border-radius:10px;
+    background:var(--input-bg);
+    color:var(--text-muted);
+    cursor:pointer;
+  }
+  .selectedFile{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:var(--input-bg);
+    border:1px solid var(--border-card);
+    border-radius:10px;
+    padding:10px 14px;
+  }
+  .fileName{color:var(--text-main);font-size:15px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .removeBtn{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:32px;height:32px;
+    background:none;
+    border:none;
+    color:var(--red);
+    cursor:pointer;
+  }
+  .removeBtn:hover{color:#fff}
+  
+  /* ───────── Блок получателя ───────── */
+  .recipientBlock{
+    display:flex;
+    gap:24px;
+    align-items:flex-end;
+    flex-wrap:wrap;
+  }
+  .radioBox{
+    border:none;
+    padding:0;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+  .radioBox legend{font-weight:600;margin-bottom:6px}
+  .radioBox label{
+    display:flex;
+    gap:6px;
+    font-size:14px;
+    align-items:center;
+    color:var(--text-main);
+  }
+  
+  /* ───────── Универсальные контролы ───────── */
+  .inputControl,
+  .form input[type="file"]{
+    width:100%;
+    padding:10px 14px;
+    font-size:15px;
+    color:var(--text-main);
+    border:1px solid var(--border-card);
+    border-radius:10px;
+    background:var(--input-bg);
+    transition:border-color .25s,box-shadow .25s;
+  }
+  .inputControl:focus{
+    outline:none;
+    border-color:var(--brand-start);
+    box-shadow:0 0 0 2px rgba(74,144,226,.35);
+  }
+  /* select‑стрелочка */
+  .form select{
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    appearance:none;
+    background-image:url("data:image/svg+xml,%3Csvg width='12' height='7' viewBox='0 0 12 7' fill='%239AA0B9' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239AA0B9' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;
+    background-position:right 12px center;
+    background-size:12px 7px;
+  }
+  /* textarea */
+  .textareaControl{min-height:120px;resize:vertical}
+  
+  /* ───────── Кнопка отправки ───────── */
+  .actions{display:flex;justify-content:flex-end;margin-top:4px}
+  .submitBtn{
+    height:52px;
+    padding:0 32px;
+    font-size:17px;
+    font-weight:700;
+    color:#fff;
+    border:none;
+    border-radius:10px;
+    background:linear-gradient(90deg,var(--brand-start),var(--brand-end));
+    cursor:pointer;
+    transition:filter .2s;
+  }
+  .submitBtn:hover:not(:disabled){filter:brightness(1.06)}
+  .submitBtn:disabled{opacity:.65;cursor:not-allowed}
+  
+  /* ───────── Подсветка ошибок поля ───────── */
+  .hasError .inputControl{border-color:var(--red)}
+  
+  .fieldErrorMsg{
+    color: var(--red);
+    font-size: 13px;
+    margin-bottom: 6px;
+    line-height: 1.3;
+    padding: 0;                 /* убрали фон и отступы */
+    background: none;
+    border: none;
+  }
+  
+  /* 🔄 визуальная подсветка любого ошибочного поля */
+  .hasError .inputControl,
+  .hasError input[type="file"]{
+    border-color: var(--red);
+  }
+
+  /* ---------- EditRequest: заголовок и «Назад» ---------- */
+.editTitle {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.backBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  background: none;
+  color: var(--text-main);
+  transition: color .2s;
+}
+.backBtn:hover { color: #fff; }
+
+.fabBack {
+  position: fixed;
+  bottom: 32px;
+  left: 32px;                   /* ← влево */
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border: none;
+  border-radius: 9999px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  background: linear-gradient(135deg,var(--brand-start),var(--brand-end));
+  color: #fff;
+  box-shadow: 0 8px 22px rgba(0,0,0,.45);
+  z-index: 60;
+  transition: transform .22s, box-shadow .22s;
+}
+.fabBack:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 26px rgba(0,0,0,.55);
+}
+
+.fabLabel { line-height: 20px; }   /* чтобы текст был по центру с иконкой */
+
+/* 1. Ошибки над формой */
+.errorBox {
+  background: #ffe5e5;
+  color: var(--red);
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* 2. Группировка label + input/select */
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* 3. Блок подписи */
+.signBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* 4. Error-state для signBlock */
+.hasError .inputControl,
+.hasError select {
+  border-color: var(--red);
+}
+
+/* 5. Для более явного поля выбора ключа и пароля */
+.signBlock select,
+.signBlock input[type="password"] {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 15px;
+  color: var(--text-main);
+  border: 1px solid var(--border-card);
+  border-radius: 10px;
+  background: var(--input-bg);
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+.signBlock select:focus,
+.signBlock input[type="password"]:focus {
+  outline: none;
+  border-color: var(--brand-start);
+  box-shadow: 0 0 0 2px rgba(74,144,226,0.35);
+}

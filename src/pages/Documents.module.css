@@ -1,0 +1,123 @@
+.main{max-width:1800px;width:95%;margin:44px auto 64px}
+
+.card{background:var(--bg-card);border:1px solid var(--border-card);border-radius:16px;padding:36px;box-shadow:0 12px 28px rgba(0,0,0,.55);animation:fade .45s ease both}
+@keyframes fade{from{opacity:0;transform:translateY(14px)}to{opacity:1}}
+
+/* back btn */
+.backBtn{margin-bottom:22px;padding:10px 22px;border:none;border-radius:10px;font-size:14px;font-weight:500;cursor:pointer;color:#fff;background:linear-gradient(90deg,var(--brand-start),var(--brand-end));transition:.2s}
+.backBtn:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,.45)}
+
+/* top bar */
+.topBar{display:flex;gap:24px;margin-bottom:26px;align-items:center}
+.filterBar{display:flex;gap:14px}
+.filterBtn{padding:8px 18px;border:1px solid #2F3240;border-radius:9999px;font-size:14px;font-weight:500;cursor:pointer;background:#20222E;color:var(--text-main);transition:.2s}
+.active{background:linear-gradient(90deg,var(--brand-start),var(--brand-end))}
+
+.searchBox{margin-left:auto;position:relative;width:300px}
+.searchBox input{width:100%;padding:10px 40px 10px 14px;border-radius:10px;border:1px solid #2F3240;background:#20222E;color:var(--text-main);font-size:14px}
+.searchIcon{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--text-muted)}
+
+/* table */
+.table{width:100%;border-collapse:collapse;font-size:15px}
+.table thead th{padding:16px;text-align:left;font-weight:600;border-bottom:2px solid var(--border-card)}
+.table tbody td{padding:16px;border-bottom:1px solid var(--border-card);vertical-align:middle}
+.table tbody tr:hover{background:rgba(255,255,255,.04)}
+
+.fileLink{display:inline-flex;align-items:center;gap:8px;color:var(--text-main);text-decoration:underline;position:relative}
+.badge{position:absolute;top:-4px;right:-14px;min-width:18px;height:18px;padding:0 4px;border-radius:10px;background:#ff5252;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center}
+
+.route{font-size:12px;color:var(--text-muted)}
+
+.status{padding:4px 14px;border-radius:6px;font-size:13px;font-weight:600;color:#fff}
+.signed{background:var(--green)}
+.pending{background:var(--yellow);color:#000}
+.rejected{background:var(--red)}
+
+.btnRow{display:flex;gap:10px}
+.btnSm{padding:6px 14px;border:none;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;color:#fff;transition:.18s;display:flex;align-items:center;gap:6px}
+.edit{background:linear-gradient(90deg,var(--brand-start),var(--brand-end))}
+.del{background:#EF4444}
+.btnSm:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.45)}
+
+.btnPrimary{margin-top:34px;padding:16px 36px;border:none;border-radius:12px;font-size:16px;font-weight:500;cursor:pointer;color:#fff;background:linear-gradient(90deg,var(--brand-start),var(--brand-end));transition:.2s;display:inline-flex;align-items:center;gap:8px}
+.btnPrimary:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(0,0,0,.5)}
+.fileName {
+    max-width: 260px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .badge {
+    margin-left: 6px;
+    padding: 0 6px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    background: var(--yellow);
+    color: #000;
+  }
+  
+  /* кнопка‑ссылка */
+  .fileLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-main);
+    background: none;
+    border: none;
+    font: inherit;
+    cursor: pointer;
+  }
+  .fileLink:hover { color: #fff; }
+  .fileLink:hover svg { filter: brightness(1.2); }
+
+  /* ───────── стиль “в процессе удаления” ───────── */
+.deleting {
+    opacity: 0.45;
+    transition: opacity .4s;
+    text-decoration: line-through;
+  }
+  
+  /* ───────── плавающая FAB “На главную” ───────── */
+  .fabHome {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0;
+    border: none;
+    cursor: pointer;
+    background: linear-gradient(135deg,var(--brand-start),var(--brand-end));
+    color: #fff;
+    box-shadow: 0 8px 22px rgba(0,0,0,.45);
+    z-index: 50;
+    transition: transform .22s;
+  }
+  .fabHome:hover { transform: translateY(-3px); }
+  
+  /* ───────── кнопка “Назад” на edit‑странице ───────── */
+  .editTitle {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .backBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    background: none;
+    color: var(--text-main);
+  }
+  .backBtn:hover { color: #fff; }
+  

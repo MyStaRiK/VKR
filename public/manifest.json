@@ -1,0 +1,7 @@
+{
+    "short_name": "ECP",
+    "name": "ЭЦП Портал",
+    "start_url": ".",
+    "display": "standalone"
+  }
+  

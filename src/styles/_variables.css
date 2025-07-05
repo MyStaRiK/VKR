@@ -1,0 +1,26 @@
+:root{
+    /* brand */
+    --brand-start:#4A90E2;
+    --brand-end:#2B7BEC;
+  
+    /* surfaces */
+    --bg-page:#12131A;
+    --bg-card:#1E202BEE;
+    --border-card:#363A4F;
+  
+    /* text & palette */
+    --text-main:#E4E6ED;
+    --text-muted:#9AA0B9;
+    --green:#22C55E;
+    --yellow:#EAB308;
+    --red:#EF4444;
+  
+    /* typography */
+    --font-sans:'Inter',system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial,sans-serif;
+    --fs-xxl:2.25rem;   /* 36 px – h1 */
+    --fs-xl:1.5rem;     /* 24 px – h2 */
+    --fs-lg:1.25rem;    /* 20 px – h3 */
+    --fs-md:1rem;       /* 16 px – base */
+    --fs-sm:.875rem;    /* 14 px – captions */
+  }
+  

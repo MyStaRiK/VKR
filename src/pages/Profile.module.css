@@ -1,0 +1,369 @@
+:root {
+  --loader-bg: rgba(0, 0, 0, 0.6);
+  --bg-card-hover: rgba(255, 255, 255, 0.08);
+}
+
+.main {
+  max-width: 1000px;
+  width: 100%;
+  margin: 60px auto;
+}
+
+.card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, .55);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.header h2,
+.nameInput {
+  margin: 0;
+  font-size: 24px;
+  color: var(--text-main);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--text-muted);
+  padding: 4px 8px;
+  width: fit-content;
+}
+
+.nameInput:focus {
+  outline: none;
+  border-color: var(--brand-start);
+}
+
+.homeBtn {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--brand-start);
+  border-radius: 6px;
+  color: var(--brand-start);
+  font-size: 14px;
+  cursor: pointer;
+  transition: background .2s, transform .2s;
+}
+
+.homeBtn:hover {
+  background: var(--brand-start);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.editBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  color: var(--brand-start);
+  cursor: pointer;
+  font-size: 14px;
+  transition: color .2s;
+}
+
+.editBtn:hover {
+  color: var(--brand-end);
+}
+
+.editActions {
+  display: flex;
+  gap: 12px;
+}
+
+/* Remove generic hover to avoid specificity clash */
+
+.saveBtn,
+.cancelBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  background: var(--bg-card);
+  color: var(--text-main);
+  box-shadow: 0 2px 6px rgba(0,0,0,.3);
+  transition: background .2s;
+}
+
+/* Specific hover for save and cancel within editActions */
+.editActions .saveBtn:hover {
+  background: #4CAF50;
+  color: #fff;
+}
+.editActions .cancelBtn:hover {
+  background: #E55353;
+  color: #fff;
+}
+
+.role {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.infoList {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 12px 24px;
+}
+
+.infoList dt {
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.infoList dd {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+.errorBox {
+  background: #ffe5e5;
+  color: var(--red);
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+/* Loader & success overlays */
+.loaderOverlay,
+.successOverlay {
+  position: fixed;
+  inset: 0;
+  background: var(--loader-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+
+.spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid rgba(255,255,255,0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.inputField,
+.inputSelect {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--border-card);
+  border-radius: 8px;
+  background: var(--bg-page);
+  color: var(--text-main);
+  font-size: 14px;
+  margin-top: 4px;
+  transition: border-color .2s;
+}
+
+.inputField:focus,
+.inputSelect:focus {
+  outline: none;
+  border-color: var(--brand-start);
+}
+
+.inputSelect {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg width='10' height='6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%239AA0B9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 10px 6px;
+}
+
+.successOverlay {
+  flex-direction: column;
+}
+
+.successIcon {
+  color: #4CAF50;
+  animation: pop 0.3s ease-out;
+}
+
+.successOverlay p {
+  margin-top: 12px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+@keyframes pop {
+  0% { transform: scale(0.4); opacity: 0; }
+  80% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+.avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--brand-start), var(--brand-end));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 700;
+  text-transform: uppercase;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  margin-bottom: 12px;
+  animation: popAvatar 0.4s ease-out both;
+}
+
+@keyframes popAvatar {
+  from {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.faEnable{
+  padding:6px 12px;
+  background:var(--brand-start);
+  border:none;
+  border-radius:6px;
+  color:#fff;
+  cursor:pointer;
+  font-size:13px;
+}
+.faSetup{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  align-items:flex-start;
+}
+.faConfirm{
+  padding:6px 16px;
+  background:var(--brand-start);
+  border:none;
+  border-radius:6px;
+  color:#fff;
+  cursor:pointer;
+}
+.faEnabled{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  color:#22c55e;
+}
+.faOffBtn{
+  background:none;border:none;color:#ef4444;cursor:pointer;
+}
+
+
+.flexRow{
+  display:flex;
+  gap:24px;
+  justify-content:center;
+  flex-wrap:nowrap;
+}
+
+/* правая карточка 2-FA */
+.card2fa{
+  flex:0 0 380px;               /* было 400px – немного уже, чтобы лучше влезало */
+  background:var(--bg-card);
+  border:1px solid var(--border-card);
+  border-radius:16px;
+  padding:28px 24px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;           /* центрируем содержимое */
+  gap:20px;
+}
+
+/* зелёный статус */
+.faStatus{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  color:#22c55e;
+  font-size:16px;
+  font-weight:600;
+}
+
+/* кнопки */
+.faEnable,.faConfirm{
+  padding:10px 18px;
+  background:var(--brand-start);
+  border:none;border-radius:8px;
+  color:#fff;font-size:15px;
+  cursor:pointer;
+  transition:background .2s;
+}
+.faEnable:hover,.faConfirm:hover{background:var(--brand-end)}
+
+/* красная кнопка «Отключить 2-FA» */
+.faOff{
+  padding:10px 20px;
+  background:#e55353;
+  border:none;border-radius:8px;
+  color:#fff;font-size:15px;
+  cursor:pointer;
+  transition:background .2s;
+}
+.faOff:hover{background:#c04040}
+
+/* поле + QR */
+.faSetup{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  align-items:center;
+}
+.faSetup img{border:1px solid var(--border-card);border-radius:10px}
+
+/* узкий экран – 2-FA под основной */
+@media(max-width:900px){
+  .row{flex-wrap:wrap;}
+  .card2fa{flex:1 1 100%;margin-top:24px}
+}
+
+.toast{
+  position:fixed;
+  right:32px;
+  bottom:32px;
+  background:#1f2937;
+  border:1px solid #4a90e2;
+  color:#e7eaf3;
+  padding:16px 20px;
+  border-radius:10px;
+  box-shadow:0 2px 12px rgba(0,0,0,.45);
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-size:15px;
+  z-index:60;
+}
+
