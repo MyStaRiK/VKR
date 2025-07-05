@@ -1,70 +1,123 @@
-# Getting Started with Create React App
+# Приложение «ЭЦП-Сервис ИРНИТУ»
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**Методика применения простой электронной цифровой подписи для оптимизации работы со студентами в ИРНИТУ**
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## Описание
 
-### `npm start`
+Это демонстрационный прототип веб-приложения, разработанного в рамках выпускной квалификационной работы по теме  
+«Разработка методики применения ЭЦП для оптимизации работы со студентами в ИРНИТУ».  
+Сервис позволяет студентам, преподавателям и административному персоналу:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Генерировать и безопасно хранить собственную простую ЭЦП (ПЭП);
+- Загружать и подписывать электронные документы (заявления, отчёты, ведомости и т. п.);
+- Передавать документы на подпись другим пользователям или подразделениям (маршрутизация);
+- Проверять и верифицировать полученные цифровые подписи;
+- Вести журнал аудита всех операций.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Приложение решает основные узкие места традиционного бумажного документооборота:  
+ускоряет оформление заявлений, снижает риск ошибок при вводе данных и повышает прозрачность всех процессов.
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Основной функционал
 
-### `npm run build`
+1. **Управление пользователями**  
+   - Регистрация и аутентификация (JWT + при необходимости двухфакторная аутентификация TOTP);
+   - Роли: студент, преподаватель, администратор.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. **Генерация и хранение ЭЦП**  
+   - Генерация RSA-ключей (2048 бит) прямо в браузере (Web Crypto API);
+   - Шифрование закрытого ключа AES-256-GCM + PBKDF2;
+   - Хранение зашифрованного ключа в IndexedDB (клиент) и/или в базе (опционально).
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. **Документооборот**  
+   - Загрузка документов (PDF, DOCX, XLSX и др.) через REST API;
+   - Создание «заявок» на подпись: указание получателя (пользователь/отдел), комментарий;
+   - Подписание: клиент отправляет только дайджест (SHA-256), сервер возвращает CAdES-BES контейнер;
+   - Проверка подписи получателем и автоматическое обновление статуса.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+4. **Журнал аудита**  
+   - Логирование ключевых действий: регистрация, вход, генерация ключей, подписи, отказ в подписи;
+   - Хранение неизменяемых записей в таблице `audit_log`.
 
-### `npm run eject`
+5. **Интерфейс пользователя (React + TypeScript)**  
+   - Экран входа/регистрации;
+   - Панель управления: быстрый доступ к последним документам и уведомлениям;
+   - Списки «Мои документы», «На подписи», «История»;
+   - Мастер создания/импорта ЭЦП с пошаговым интерфейсом.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Технологический стек
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- **Backend**: Node.js (v14+) + Express  
+  - REST API, OAuth2/JWT-аутентификация  
+  - SQLite 3 (для прототипа; легко перевести на PostgreSQL)  
+  - Модули для ГОСТ-алгоритмов: `crypto-gost` (при необходимости)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- **Frontend**: React 18 + TypeScript  
+  - Web Crypto API для генерации и подписи  
+  - Компонентная структура, адаптивный дизайн
 
-## Learn More
+- **Криптография**:  
+  - RSA-2048, SHA-256, AES-256-GCM, PBKDF2  
+  - Формат подписи: CAdES-BES; поддержка штампа времени RFC 3161
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- **Дополнительно**:  
+  - Docker (опционально) для быстрого развёртывания  
+  - ESLint/Prettier, Husky для контроля качества кода  
+  - Jest + Supertest для автоматизированных тестов API
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Серверные зависимости
 
-### Analyzing the Bundle Size
+| Пакет           | Версия         | Описание                                                                                         |
+|-----------------|----------------|--------------------------------------------------------------------------------------------------|
+| **axios**       | ^1.9.0         | Promise-ориентированный HTTP-клиент для браузера и Node.js, используется для внутренних запросов между сервисами и внешних API. |
+| **bcrypt**      | ^5.1.1         | Крупно-требуемая библиотека для надёжного хеширования паролей (bcrypt).                          |
+| **cors**        | ^2.8.5         | Middleware для Express, позволяющее настраивать политику CORS (Cross-Origin Resource Sharing).   |
+| **dotenv**      | ^16.5.0        | Загружает переменные окружения из `.env`-файла в `process.env`.                                 |
+| **express**     | ^5.1.0         | Минималистичный веб-фреймворк для Node.js, основной каркас серверной части.                     |
+| **jsonwebtoken**| ^9.0.2         | Работа с JWT (JSON Web Token) — генерация, подпись и верификация токенов аутентификации.         |
+| **multer**      | ^1.4.5-lts.2   | Middleware для обработки `multipart/form-data`, необходим для загрузки файлов (PDF, DOCX и т. д.). |
+| **otplib**      | ^12.0.1        | Реализация TOTP/HOTP алгоритмов для двухфакторной аутентификации.                                |
+| **pdf-lib**     | ^1.17.1        | Чистая JavaScript-библиотека для создания и изменения PDF-документов на сервере.                 |
+| **sqlite**      | ^5.1.1         | Обёртка для работы с SQLite через промисы, упрощает асинхронные запросы к базе.                 |
+| **sqlite3**     | ^5.1.7         | Нативный драйвер SQLite для Node.js — обеспечивает низкоуровневый доступ к файлу БД.             |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### DevDependencies
 
-### Making a Progressive Web App
+| Пакет     | Версия      | Описание                                            |
+|-----------|-------------|-----------------------------------------------------|
+| **nodemon** | ^3.1.10   | Инструмент для автоматической перезагрузки сервера при изменении кода. |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+## Фронтенд-зависимости
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+| Пакет                                    | Версия       | Описание                                                                                     |
+|------------------------------------------|--------------|----------------------------------------------------------------------------------------------|
+| **react**                                | ^19.1.0      | Основная библиотека для построения UI на базе компонент.                                     |
+| **react-dom**                            | ^19.1.0      | Пакет для рендеринга React-компонентов в DOM.                                               |
+| **react-router-dom**                     | ^6.30.0      | Маршрутизация в React-приложениях (SPA).                                                    |
+| **react-scripts**                        | 5.0.1        | Набор скриптов и конфигураций от Create React App для сборки, разработки и тестирования.    |
+| **web-vitals**                           | ^2.1.4       | Инструменты для замера ключевых метрик производительности веб-страниц (LCP, FID, CLS и др.). |
+| **filter**                               | ^0.1.1       | Лёгкая утилита для фильтрации массивов на клиенте (необязательна, опциональна).             |
+| **lucide-react**                         | ^0.503.0     | Набор настраиваемых SVG-иконок в виде React-компонентов.                                    |
+| **@testing-library/react**               | ^16.3.0      | Утилиты для тестирования React-компонентов через рендеринг и взаимодействие.                |
+| **@testing-library/jest-dom**            | ^6.6.3       | Расширения для Jest-матчеров, упрощающие ассерты в DOM-тестах.                               |
+| **@testing-library/dom**                 | ^10.4.0      | Низкоуровневые утилиты для тестирования DOM-дерева.                                         |
+| **@testing-library/user-event**          | ^13.5.0      | Симуляция действий пользователя (клики, ввод текста) в тестах.                              |
 
-### Deployment
+### DevDependencies
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+| Пакет  | Версия     | Описание                                                         |
+|--------|------------|------------------------------------------------------------------|
+| **sass** | ^1.87.0  | Компилятор SCSS/Sass для использования препроцессорных стилей.   |
 
-### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
